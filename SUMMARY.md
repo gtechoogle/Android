@@ -6,4 +6,5 @@
 * [Init 来龙去脉](init-de-lai-long-qu-mai.md)
 * [ANR 因果关系](anr-cong-he-er-lai.md)
 * [Activity UI/Main Thread 大名鼎鼎](activity-uimain-thread-da-ming-ding-ding.md)
+* [App 如何诞生](app-ru-he-dan-sheng.md)
 
