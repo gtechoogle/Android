@@ -6,7 +6,9 @@ Init 就是 initial 的简写，意味着初始，那么这个初始进程是从
 
 简单来讲，Linux 内核为了安全等因素，会将系统的进程分成两大类，内核进程 \(Kernel Space\) 和用户空间进程，这样做的目的就是为了不让用户空间进程去直接操作系统资源，而对于内核来说，用户空间的进程都是不可信的。所以当 Linux 内核把内核空间进程都初始话后，就要开始初始化第一个用户空间进程，而这个进程就是 Init 进程，那么是在哪里初始的呢? 
 
-以 Kernel 4.14 代码为例，整个内核的入口点是在 kernel-4.14/init/main.c 中
+以 Kernel 4.14 代码为例，整个内核的入口点是在 kernel-4.14/init/main.c 中, 基本就如上看到的可以分成两个部分，而我们重点关注的 Init 的启动就是在 Hint1 这个点
+
+
 
 {% code-tabs %}
 {% code-tabs-item title="kernel-4.14/init/main.c" %}
@@ -28,8 +30,8 @@ static int __ref kernel_init(void *unused)
 #ifdef CONFIG_MTPROF
 		log_boot("Kernel_init_done");
 #endif
-	if (ramdisk_execute_command) {
-		ret = run_init_process(ramdisk_execute_command);
+	if (ramdisk_execute_command) { 
+		ret = run_init_process(ramdisk_execute_command); // Hint1
 		if (!ret)
 			return 0;
 		pr_err("Failed to execute %s (error %d)\n",
